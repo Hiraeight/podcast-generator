@@ -1,3 +1,5 @@
+FROM ubuntu:latest
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     python3.10 \
@@ -7,12 +9,12 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Create a virtual environment
+# Create a virtual environment and install dependencies
 RUN python3 -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
     /venv/bin/pip install PyYAML
 
-# Set the virtual environment in PATH
+# Add virtual environment to PATH
 ENV PATH="/venv/bin:$PATH"
 
 # Copy application files
